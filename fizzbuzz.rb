@@ -1,12 +1,12 @@
 #!/usr/bin/ruby
 
-filename = ARGV[0]
+file_name = ARGV[0]
 
-if filename.nil?
+if file_name.nil?
   exit
 end
 
-file = File.new(filename)
+file = File.new(file_name)
 
 while (line = file.gets)
   digits = line.split(" ")
