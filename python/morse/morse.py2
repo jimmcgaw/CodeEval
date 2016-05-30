@@ -1,0 +1,36 @@
+#!/usr/bin/python
+
+import sys
+
+# check that a filename argument was provided, otherwise
+if len(sys.argv) < 2:
+  raise Exception("Filename must be first argument provided")
+
+filename = sys.argv[1]
+lines = []
+
+# open file in read mode, assuming file  is in same directory as script
+try:
+  file = open(filename, 'r')
+
+  # read Fibbonacci indexes from file into list
+  lines = file.readlines()
+  file.close()
+except IOError:
+  print "File '%s' was not found in current directory" % filename
+
+lines = [line.replace('\n', '') for line in lines]
+
+try:
+  lines.remove("")
+except:
+  pass
+
+morse_mapping = {'---': 'O', '--.': 'G', '-...': 'B', '-..-': 'X', '.-.': 'R', '--.-': 'Q', '--..': 'Z', '.--': 'W', '..---': '2', '.-': 'A', '..': 'I', '-.-.': 'C', '..-.': 'F', '-.--': 'Y', '-': 'T', '.': 'E', '.-..': 'L', '...': 'S', '..-': 'U', '.----': '1', '-----': '0', '-.-': 'K', '-..': 'D', '----.': '9', '-....': '6', '.---': 'J', '.--.': 'P', '....-': '4', '--': 'M', '-.': 'N', '....': 'H', '---..': '8', '...-': 'V', '--...': '7', '.....': '5', '...--': '3'}
+
+for line in lines:
+    morse_chars = line.split(' ')
+    chars = []
+    for morse_char in morse_chars:
+        chars.append(morse_mapping.get(morse_char, u' '))
+    print ''.join(chars)
